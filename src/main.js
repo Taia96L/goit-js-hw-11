@@ -35,7 +35,6 @@ function handlerSubmit(event) {
     });
 }
 
-//-- text fo iziToast--
 
 function errorText(error) {
   const errorText = {

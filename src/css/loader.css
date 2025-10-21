@@ -10,6 +10,7 @@
   margin: 0 auto;
   margin-top: 24px;
 }
+
 .loader::after {
   content: '';
   box-sizing: border-box;
@@ -29,4 +30,8 @@
   100% {
     transform: rotate(360deg);
   }
+}
+
+.is-hidden {
+  display: none;
 }

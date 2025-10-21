@@ -24,25 +24,23 @@ export function createGallery(images) {
   <a href="${largeImageURL}" class="link" target="_blank">
   <img src="${webformatURL}" alt="${tags}" width="360" /></a>
   <ul class="description-list">
-    
-  <li class="description-item">
+    <li class="description-item">
       <h3 class="description-title">Likes</h3>
-        <p class="description-text">${likes}</p>
+      <p class="description-text">${likes}</p>
     </li>
-    
-  <li class="description-item">
-    <h3 class="description-title">Views</h3>
+    <li class="description-item">
+      <h3 class="description-title">Views</h3>
       <p class="description-text">${views}</p>
-  </li>
-  <li class="description-item">
-    <h3 class="description-title">Comments</h3>
+    </li>
+    <li class="description-item">
+      <h3 class="description-title">Comments</h3>
       <p class="description-text">${comments}</p>
-  </li>
-  <li class="description-item">
-    <h3 class="description-title">Downloads</h3>
+    </li>
+    <li class="description-item">
+      <h3 class="description-title">Downloads</h3>
       <p class="description-text">${downloads}</p>
-  </li>
-</ul>
+    </li>
+  </ul>
 </li>`
     )
     .join('');
@@ -56,10 +54,9 @@ export function clearGallery() {
 }
 
 export function showLoader() {
-  loader.classList.add('loader');
+  loader.classList.remove('is-hidden');
 }
+
 export function hideLoader() {
-  if (loader.classList.contains('loader')) {
-    loader.classList.remove('loader');
-  }
+  loader.classList.add('is-hidden');
 }
