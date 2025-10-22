@@ -1,19 +1,25 @@
 import iziToast from 'izitoast';
 import { getImagesByQuery } from './js/pixabay-api';
-import { createGallery, hideLoader, clearGallery } from './js/render-functions';
+import { createGallery, hideLoader, clearGallery, showLoader } from './js/render-functions';
 
 export const form = document.querySelector('.form');
 
 form.addEventListener('submit', handlerSubmit);
 hideLoader();
+
 function handlerSubmit(event) {
   event.preventDefault();
   clearGallery();
+
   const query = event.target.elements['search-text'].value.trim();
+
   if (query === '') {
     iziToast.error(fillText());
     return;
   }
+
+  // ✅ Показуємо лоадер перед початком запиту
+  showLoader();
 
   getImagesByQuery(query)
     .then(data => {
@@ -24,20 +30,18 @@ function handlerSubmit(event) {
 
       createGallery(data);
     })
-
     .catch(error => {
       iziToast.error(errorText(error));
     })
-
     .finally(() => {
+      // ✅ Ховаємо лоадер після завершення запиту
       hideLoader();
       form.reset();
     });
 }
 
-
 function errorText(error) {
-  const errorText = {
+  return {
     title: 'Error',
     message: `Oops.. something goes wrong, error : ${error.status} !`,
     position: 'center',
@@ -48,11 +52,10 @@ function errorText(error) {
     messageColor: 'white',
     titleColor: 'white',
   };
-  return errorText;
 }
 
 function infoText() {
-  const infoText = {
+  return {
     message:
       'Sorry, there are no images matching your search query. Please try again!',
     position: 'center',
@@ -62,12 +65,11 @@ function infoText() {
     icon: '',
     messageColor: 'white',
   };
-  return infoText;
 }
 
 function fillText() {
-  const fillText = {
-    message: 'Sorry, you need to fill searсh query',
+  return {
+    message: 'Sorry, you need to fill search query',
     position: 'topRight',
     timeout: 5000,
     progressBar: false,
@@ -75,5 +77,4 @@ function fillText() {
     icon: '',
     messageColor: 'white',
   };
-  return fillText;
 }
